@@ -33,6 +33,7 @@ public class DonorController {
 
     @PostMapping
     public ResponseEntity<DonorResult> save(@RequestBody List<Donor> donors){
+        donorService.save(donors);
         DonorResult donorResult = donorService.fetchDonorResult(donors);
         return ResponseEntity.status(HttpStatus.CREATED).body(donorResult);
     }

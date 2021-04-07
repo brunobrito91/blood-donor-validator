@@ -16,9 +16,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 public class Donor {
-    @Id
+
     private Long id;
     private String nome;
+    @Id
     private String cpf;
     private String rg;
     @JsonFormat(pattern = "dd/MM/yyyy")
