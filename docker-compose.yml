@@ -1,0 +1,39 @@
+version: '3.1'
+services:
+  blood-donor-validator-database-service:
+    container_name: blood-donor-validator-database-container
+    image: mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - blood-donor-validator-network
+    volumes:
+      - blood-donor-validator-volume:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: blood_donor
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  blood-donor-validator-application-service:
+    container_name: blood-donor-validator-application-container
+    image: blood-donor-validator
+    ports:
+      - "8080:8080"
+    networks:
+      - blood-donor-validator-network
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - blood-donor-validator-database-service
+    environment:
+      MYSQL_HOST: blood-donor-validator-database-service
+
+networks:
+  blood-donor-validator-network:
+
+volumes:
+  blood-donor-validator-volume:
