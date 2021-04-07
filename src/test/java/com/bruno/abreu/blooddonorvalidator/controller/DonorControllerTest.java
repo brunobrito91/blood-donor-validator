@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class DonorControllerTest {
+class DonorControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -50,7 +50,7 @@ public class DonorControllerTest {
         String content = objectMapper.writeValueAsString(donors);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/donor/batch")
+                .post("/donor")
                 .content(content).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
@@ -70,7 +70,7 @@ public class DonorControllerTest {
         String content = "[{\"id\":null,\"nome\":null,\"cpf\":null,\"rg\":null,\"data_nasc\":\"23/05/1964\",\"sexo\":null,\"mae\":null,\"pai\":null,\"email\":null,\"cep\":null,\"endereco\":null,\"numero\":null,\"bairro\":null,\"cidade\":null,\"estado\":null,\"telefone_fixo\":null,\"celular\":null,\"altura\":null,\"peso\":null,\"tipo_sanguineo\":\"A+\"}]";
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/donor/batch")
+                .post("/donor")
                 .content(content).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
